@@ -7,10 +7,10 @@ This contract has been deployed on multiple network, listed above :
 Network  | Address
 ------------- | -------------
 Ethereum  | 0x000000
-Polygon | https://polygonscan.com/address/0x4aAFcE8f89Ba11fD555a3d2A910Bd2FDB2465282
-BSC | https://bscscan.com/address/0xDA5468bF65e42a8C7bA0a3df93e5f622A5E1fcd9
-Avalanche | https://snowtrace.io/address/0xDA5468bF65e42a8C7bA0a3df93e5f622A5E1fcd9
-Fantom | https://ftmscan.com/address/0xDA5468bF65e42a8C7bA0a3df93e5f622A5E1fcd9
+Polygon | https://polygonscan.com/address/0x143240ea3bFEA4B214a85cF0Cb7f99434ee6bAEd
+BSC | https://bscscan.com/address/0xa6Cd8E46eE700D6DfEAe79e44b5a1493736385Fb
+Avalanche | https://snowtrace.io/address/0x4aafce8f89ba11fd555a3d2a910bd2fdb2465282
+Fantom | https://ftmscan.com/address/0xa6Cd8E46eE700D6DfEAe79e44b5a1493736385Fb
 
 # Functions 
 
