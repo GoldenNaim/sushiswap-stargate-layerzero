@@ -10,7 +10,7 @@ Ethereum  | 0x000000
 Polygon | https://polygonscan.com/address/0x4aAFcE8f89Ba11fD555a3d2A910Bd2FDB2465282
 BSC | https://bscscan.com/address/0xDA5468bF65e42a8C7bA0a3df93e5f622A5E1fcd9
 Avalanche | 0x000000
-Fantom | 0x000000
+Fantom | https://ftmscan.com/address/0xDA5468bF65e42a8C7bA0a3df93e5f622A5E1fcd9
 
 # Functions 
 
