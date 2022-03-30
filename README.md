@@ -16,7 +16,7 @@ Fantom | 0x000000
 
 ### swapThenSend
 
-This function must be used if you want to swap **an ERC20 token** against USDC, USDT or STG.
+This function must be used if you want to swap **an ERC20 token** against USDC, USDT, BUSD ( on BSC ) or STG.
 The parameters are listed above : 
 
 Parameters | Value
@@ -35,7 +35,7 @@ slippageStargate *(uint256)* | The maximum slippage in percentage
 
 ### swapNativeThenSend
 
-This function must be used if you want to swap **a native token ( Ethereum, Matic..)** against USDC, USDT or STG.
+This function must be used if you want to swap **a native token ( Ethereum, Matic..)** against USDC, USDT, BUSD ( on BSC ) or STG.
 
 The parameters are listed above : 
 
