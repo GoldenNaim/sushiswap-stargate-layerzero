@@ -53,15 +53,22 @@ contract sushiLayerZero {
     address internal constant SUSHI_ETH_ROUTER_ADDRESS  =   0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F;
     address internal STARGATE_ROUTER;
     address internal SUSHI_ROUTER;
-    address internal TOKEN_USDC;
-    address internal TOKEN_USDT;
-    address internal TOKEN_STG;
     address public OWNER;
 
+    mapping (address => bool) public TOKENS_ALLOWED;
     
+    function addToken(address token) public {
+        require(msg.sender == OWNER, "You are not the owner");
+        TOKENS_ALLOWED[token]   =   true;
+        approuver(token,STARGATE_ROUTER,INFINITY_AMOUNT);
+    }
+
+    function isTokenAllowed(address token) internal view returns (bool){
+        return TOKENS_ALLOWED[token];
+    }
     
     // env -> 1:ethereum, 2:alternative_networks
-    constructor(address _stgRouter, address USDC, address USDT, address STG, uint256 env) {
+    constructor(address _stgRouter, uint256 env, address[] memory tokens) {
         //endpoint      =   ILayerZeroEndpoint(_layerZeroEndpoint);
         stargateRouter  =   IStargateRouter(_stgRouter);
         STARGATE_ROUTER =   _stgRouter;
@@ -72,13 +79,12 @@ contract sushiLayerZero {
             sushiswapRouter =   IUniswapV2Router02(SUSHI_ROUTER_ADDRESS);
             SUSHI_ROUTER    =   SUSHI_ROUTER_ADDRESS;
         }
-        approuver(USDC,STARGATE_ROUTER,INFINITY_AMOUNT);
-        approuver(USDT,STARGATE_ROUTER,INFINITY_AMOUNT);
-        approuver(STG,STARGATE_ROUTER,INFINITY_AMOUNT);
-        TOKEN_USDC  =   USDC;
-        TOKEN_USDT  =   USDT;
-        TOKEN_STG   =   STG;
+
         OWNER       =   msg.sender;
+
+        for (uint i=0; i<tokens.length; i++) {
+            addToken(tokens[i]);
+        }
         
     }
 
@@ -90,7 +96,7 @@ contract sushiLayerZero {
         uint256 isAllowed   =   manageToken(route[0]).allowance(msg.sender,address(this));
         require(amount > 0, "Amount must be higher than 0");
         require(isAllowed > amount, "You must allow this contract to spend your tokens");
-        require(route[route.length-1] == TOKEN_USDC || route[route.length-1] == TOKEN_USDT || route[route.length-1] == TOKEN_STG, "The token wanted must be USDC, USDT or STG");
+        require(isTokenAllowed(route[route.length-1]), "The token wanted is not allowed");
         
         // 1. Transfer tokens from user to the contract
         manageToken(route[0]).transferFrom(msg.sender,address(this),amount);
@@ -117,7 +123,7 @@ contract sushiLayerZero {
         
         // 0. Check 
         require(amount > 0, "Amount must be higher than 0");
-        require(route[route.length-1] == TOKEN_USDC || route[route.length-1] == TOKEN_USDT || route[route.length-1] == TOKEN_STG, "The token wanted must be USDC, USDT or STG");
+        require(isTokenAllowed(route[route.length-1]), "The token wanted is not allowed");
 
         // 1. Swap
         uint256[] memory swapIt;
